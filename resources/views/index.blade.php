@@ -9,6 +9,7 @@
         <title>{{ config('app.name', 'Multi App') }}</title>    
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>

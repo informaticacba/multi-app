@@ -1,23 +1,20 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
-
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  <div>
+    <el-button @click="visible = true">Button</el-button>
+    <el-dialog :visible.sync="visible" title="Hello world">
+      <p>Try Element</p>
+    </el-dialog>
+ 
+  </div>
 </template>
 
 <script>
     export default {
+        data: function() {
+            return { visible: false }
+        },
         mounted() {
-            console.log('Component mounted.')
+           
         }
     }
 </script>
