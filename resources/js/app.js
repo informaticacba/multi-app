@@ -1,19 +1,34 @@
 window._ = require('lodash');
-
 window.axios = require('axios');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
 window.Vue = require('vue'); 
-window.ElementUI = require('element-ui');
-//import 'element-ui/lib/theme-chalk/index.css';
-import lang from 'element-ui/lib/locale/lang/es'
 
-Vue.use(lang)
-
+import ElementUI from 'element-ui';
+import VueRouter from 'vue-router';
+   
+Vue.use(VueRouter);
 Vue.use(ElementUI);
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('layout-component', require('./components/LayoutComponent.vue').default)
 
-const app = new Vue({
-    el: '#app',   
+const router = new VueRouter({
+    mode: 'history',
+    routes: [
+        {
+            path: '/',
+            name: 'login',
+            component: Vue.component('login-component', require('./components/LoginComponent.vue').default)
+        },
+        {
+            path: '/home',
+            name: 'home',
+            component: Vue.component('home-component', require('./components/HomeComponent.vue').default),
+        },
+    ],
 });
+
+const app = new Vue({ 
+    el: '#app', 
+    router,    
+});
+

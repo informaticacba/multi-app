@@ -8,14 +8,13 @@
     
         <title>{{ config('app.name', 'Multi App') }}</title>    
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
-        
+        <script src="{{ asset('js/app.js') }}" defer></script>        
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
         <div id="app">
-            <example-component></example-component>
+            <layout-component></layout-component>
         </div>
     </body>
 </html>
