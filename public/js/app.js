@@ -3649,8 +3649,7 @@ __webpack_require__.r(__webpack_exports__);
           };
           axios.post('login', params).then(function (respose) {
             _this.errors = '';
-
-            _this.$router.push('/home');
+            console.log(respose); //this.$router.push('/home');
           })["catch"](function (errors) {
             _this.error = errors.response.data.errors;
           });

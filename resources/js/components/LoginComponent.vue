@@ -58,7 +58,8 @@
                         
                         axios.post('login', params).then((respose) => {
                             this.errors = '';
-                            this.$router.push('/home');
+                            console.log(respose);
+                            //this.$router.push('/home');
                         }).catch((errors) => {
                             this.error = errors.response.data.errors;
                         });
