@@ -1,5 +1,6 @@
 <template>
   <div>
+      {{user}}
     <el-alert v-if="error"
         :title="error.email[0]"
         type="error"
@@ -38,15 +39,20 @@
     export default {
         data() {           
             return {
-                ruleForm: {  
+                ruleForm: {                      
                     email: '',
                     password : ''
                 },
-                error : ''
+                error : '',
+                user: '',
             }
+        },
+        created(){
+            console.log( this.$cookie);
         },
         methods: {
             onSubmit(formName) {
+                
 
                  this.$refs[formName].validate((valid) => {
                     if (valid) {
@@ -55,13 +61,15 @@
                             email: this.ruleForm.email,
                             password: this.ruleForm.password
                         };
-                        
-                        axios.post('login', params).then((respose) => {
-                            this.errors = '';
-                            console.log(respose);
-                            //this.$router.push('/home');
-                        }).catch((errors) => {
-                            this.error = errors.response.data.errors;
+
+                        axios.get('/sanctum/csrf-cookie').then(response => {                        
+                            axios.post('sesion', params).then((respose) => {
+                                this.errors = '';
+                             console.log(this.user = respose);
+                                //this.$router.push('/home');
+                            }).catch((errors) => {
+                                this.error = errors.response.data.errors;
+                            });
                         });
                     }  
                 });

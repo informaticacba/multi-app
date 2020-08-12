@@ -3627,6 +3627,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3634,8 +3635,12 @@ __webpack_require__.r(__webpack_exports__);
         email: '',
         password: ''
       },
-      error: ''
+      error: '',
+      user: ''
     };
+  },
+  created: function created() {
+    console.log(this.$cookie);
   },
   methods: {
     onSubmit: function onSubmit(formName) {
@@ -3647,11 +3652,13 @@ __webpack_require__.r(__webpack_exports__);
             email: _this.ruleForm.email,
             password: _this.ruleForm.password
           };
-          axios.post('login', params).then(function (respose) {
-            _this.errors = '';
-            console.log(respose); //this.$router.push('/home');
-          })["catch"](function (errors) {
-            _this.error = errors.response.data.errors;
+          axios.get('/sanctum/csrf-cookie').then(function (response) {
+            axios.post('sesion', params).then(function (respose) {
+              _this.errors = '';
+              console.log(_this.user = respose); //this.$router.push('/home');
+            })["catch"](function (errors) {
+              _this.error = errors.response.data.errors;
+            });
           });
         }
       });
@@ -81588,6 +81595,7 @@ var render = function() {
   return _c(
     "div",
     [
+      _vm._v("\n    " + _vm._s(_vm.user) + "\n  "),
       _vm.error
         ? _c("el-alert", {
             attrs: {
@@ -96927,6 +96935,7 @@ __webpack_require__.r(__webpack_exports__);
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.withCredentials = true;
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
 
@@ -96942,9 +96951,28 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   }, {
     path: '/home',
     name: 'home',
-    component: Vue.component('home-component', __webpack_require__(/*! ./components/HomeComponent.vue */ "./resources/js/components/HomeComponent.vue")["default"])
+    component: Vue.component('home-component', __webpack_require__(/*! ./components/HomeComponent.vue */ "./resources/js/components/HomeComponent.vue")["default"]) //meta: { requiresAuth: true }
+
   }]
 });
+/*
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        // this route requires auth, check if logged in
+        // if not, redirect to login page.
+        if (!auth.loggedIn()) {
+            next({
+                path: '/',
+                query: { redirect: to.fullPath }
+            })
+        } else {
+            next()
+        }
+    } else {
+        next()
+    }
+})*/
+
 var app = new Vue({
   el: '#app',
   router: router
