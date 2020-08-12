@@ -1,8 +1,9 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+/* Color del tema */
+$--color-primary: #5C18E3;
 
-// Variables
-@import 'variables';
+/* Ubicación de la fuente, obligatoria */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "~element-ui/packages/theme-chalk/src/index";
+
+
