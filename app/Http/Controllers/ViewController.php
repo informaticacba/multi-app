@@ -12,4 +12,21 @@ class ViewController extends Controller
         }
         return response()->json(compact('token'));
     }
+
+    public function usu(Request $request){
+
+      // $use = new \App\User();
+      // $use->name = 'jjj';
+      // $use->email = 'asdf';
+      // $use->password = 'sadf';
+      // $use->save();
+
+      $article = \App\User::first();
+
+
+
+ 
+    // $audit = $article->audits();
+
+    }
 }
